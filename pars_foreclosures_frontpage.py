@@ -16,7 +16,7 @@ for item in list_of_trs:
         sales_date = str(td_children[2].contents)[1:-1]
         plaintiff = str(td_children[3].contents)[1:-1]
         owner = str(td_children[4].contents)[1:-1]
-        address = str(td_children[4].contents)[1:-1]
+        address = str(td_children[5].contents)[1:-1]
         list_of_foreclosures.append([sheriff_id,',',sales_date,',',
                                      plaintiff,',',owner,',',address,',',str(link)])
 
