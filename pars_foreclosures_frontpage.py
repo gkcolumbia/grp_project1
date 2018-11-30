@@ -26,7 +26,7 @@ for item in list_of_trs:
         owner = str(td_children[4].contents)[1:-1]
         address = str(td_children[5].contents)[1:-1]
         list_of_foreclosures.append([sheriff_id,',',sales_date,',',
-                                     plaintiff,',',owner,',',address,',',str(link)])
+                                     plaintiff,',',owner,',',address,',',"'"+str(link)+"'"])
         
 
         
