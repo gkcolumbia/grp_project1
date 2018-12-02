@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Sun Dec  2 14:50:13 2018
-
-@author: gabrielapinto
-"""
 
 from scraping_functions import *
 import psycopg2
