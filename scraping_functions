@@ -65,5 +65,4 @@ def get_property(address):
                 data = 'NULL'
     except:
         year_built, bedroom_n, bathroom_n, size, last_sold_year, last_sold_price2 = 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL'
-    print(address)
     return [address, year_built, bedroom_n, bathroom_n, size2, last_sold_year, last_sold_price2]
