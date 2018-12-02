@@ -2,7 +2,7 @@
 Python and Kobra are not the same - Section 1
 
 ## Team Members: 
-Maria Jose Gamonal, Gabriela Pinto, Jeff Lv, and Georges Kouame
+Maria Jose Gamonal (UNI: mjg2268), Georges Kouame (UNI: nk2800), Jeff Lv (UNI: zl2731), and Gabriela Pinto (UNI: gpp2111)
 
 # Description
 This package extracts foreclosure property information from a public foreclosures website, enriches the data with information 
