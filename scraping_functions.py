@@ -31,6 +31,7 @@ def get_foreclosures():
             plaintiff = str(td_children[3].contents)[2:-2]
             plaintiff2 = plaintiff.replace("'","") #Remove posible ' signs in the string to aboid conflicts
             defendant = str(td_children[4].contents)[2:-2]
+            defendant2 = defendant.replace("'","") #Remove posible ' signs in the string to aboid conflicts
             address = str(td_children[5].contents)[2:-2]
             address2 = address.replace("'","") #Remove posible ' signs in the string to aboid conflicts
             
@@ -48,7 +49,7 @@ def get_foreclosures():
             initial_status_date = str(list_of_tds[21])[4:-5]
             last_status = str(list_of_tds[length_tds-2])[4:-5]
             last_status_date = str(list_of_tds[length_tds-1])[4:-5]
-            list_of_foreclosures.append([sheriff_id, address2, initial_status, initial_status_date, last_status, last_status_date, plaintiff2, defendant, default_amount2,sales_date])
+            list_of_foreclosures.append([sheriff_id, address2, initial_status, initial_status_date, last_status, last_status_date, plaintiff2, defendant2, default_amount2,sales_date])
     return list_of_foreclosures
 
 # Given an address of a house, the get_property function returns the address, year built, 
