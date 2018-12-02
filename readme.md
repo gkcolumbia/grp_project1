@@ -17,6 +17,14 @@ to run once a day and changes in property information are applied into the datab
 - csv
 - time
 
+## Each File Explained
+1. scraping_functions
+This file contains two web scraping functions. 
+
+get_foreclosures() scrapes the Sheriff's office website (https://salesweb.civilview.com/Sales/SalesSearch?countyId=2) and gets the information of houses on auction.
+
+get_property(address) scrapes Zillow (https://www.zillow.com/). Given an address of a house, the get_property function returns the address, year built, number of bedrooms, number of bathrooms, size, last sold year for the house, last_sold_price for the house
+
 ## Run Instructions
 
 
