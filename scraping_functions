@@ -54,7 +54,10 @@ def get_property(address):
         match = re.findall(pattern, divs_text)    
         last_sold_year = match[0].split(' ')[1]
         last_sold_price = match[0].split(' ')[3]
+        for data in year_built, bedroom_n, bathroom_n, size, last_sold_year, last_sold_price:
+            if data == '--':
+                data = 'NULL'
     except:
-        year_built, bedroom_n, bathroom_n, size, last_sold_year, last_sold_price = '--', '--', '--', '--', '--', '--'
+        year_built, bedroom_n, bathroom_n, size, last_sold_year, last_sold_price = 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL'
     print(address)
     return [address, year_built, bedroom_n, bathroom_n, size, last_sold_year, last_sold_price]
