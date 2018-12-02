@@ -1,0 +1,62 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Sat Dec  1 23:06:59 2018
+
+@author: gabrielapinto
+"""
+
+def get_foreclosures():
+    session = requests.Session()
+    response = session.get('https://salesweb.civilview.com/Sales/SalesSearch?countyId=2')
+    soup = bs4.BeautifulSoup(response.content, 'html.parser')
+    session_id = response.cookies['ASP.NET_SessionId'] #necessary to get into the foreclosures' details pages later
+    list_of_trs = soup.find_all('tr')
+    list_of_foreclosures = []
+    for data_row in list_of_trs:
+        td_children = data_row.findChildren('td')
+        if td_children:
+            link = str(td_children[0].contents)[10:-14]
+            sheriff_id = str(td_children[1].contents)[2:-2] #Sheriff ID
+            sales_date = str(td_children[2].contents)[2:-2]
+            plaintiff = str(td_children[3].contents)[2:-2]
+            defendant = str(td_children[4].contents)[2:-2]
+            address = str(td_children[5].contents)[2:-2]
+            url = 'https://salesweb.civilview.com/'+str(link) #get into the details page
+            response2 = session.get(url)
+            soup2 = bs4.BeautifulSoup(response2.content, 'html.parser')
+            list_of_tds = soup2.find_all('td')
+            length_tds = len(list_of_tds)
+            default_amount = str(list_of_tds[15])[4:-5]
+            initial_status = str(list_of_tds[20])[4:-5]
+            initial_status_date = str(list_of_tds[21])[4:-5]
+            last_status = str(list_of_tds[length_tds-2])[4:-5]
+            last_status_date = str(list_of_tds[length_tds-1])[4:-5]
+            list_of_foreclosures.append([sheriff_id, address, initial_status, initial_status_date, last_status, last_status_date, plaintiff, defendant, default_amount,sales_date])
+    return list_of_foreclosures
+
+def get_property(address):
+    link_address = address.replace(' ','-')
+    url = 'https://www.zillow.com/homes/for_sale/' + link_address + '_rb/'
+    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.36'}
+    response = requests.get(url, headers=headers)
+    result = bs4.BeautifulSoup(response.content,'lxml')
+    try:
+        bedroom_n = result.find('h3', 'edit-facts-light').find_all('span', {'class' : None})[0].get_text().split(' ')[0]
+        bathroom_n = result.find('h3', 'edit-facts-light').find_all('span', {'class' : None})[1].get_text().split(' ')[0]
+        size = result.find('h3', 'edit-facts-light').find_all('span', {'class' : None})[2].get_text().split(' ')[0]
+        year_built = result.find_all('div', {'class': 'fact-value'})[1].get_text()
+        divs_text = ''
+        all_divs = result.find_all('div', {'class': 'fact-value'})
+        for div in all_divs:
+            text = div.get_text()
+            divs_text += text + ' '
+        
+        pattern = r'\w{3} \d{4} \w{3} \S+'
+        match = re.findall(pattern, divs_text)    
+        last_sold_year = match[0].split(' ')[1]
+        last_sold_price = match[0].split(' ')[3]
+    except:
+        year_built, bedroom_n, bathroom_n, size, last_sold_year, last_sold_price = '--', '--', '--', '--', '--', '--'
+    print(address)
+    return [address, year_built, bedroom_n, bathroom_n, size, last_sold_year, last_sold_price]
