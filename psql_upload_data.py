@@ -5,6 +5,7 @@
 from scraping_functions import *
 import psycopg2
 
+username = 'jefflv'
 
 def upload_data(list_foreclosures):
 
@@ -17,7 +18,7 @@ def upload_data(list_foreclosures):
     for row in list_foreclosures:
 
         #open connection to database named tools_project using user josehija (change if necesary)
-        conn = psycopg2.connect(dbname='tools_project', user='josehija')
+        conn = psycopg2.connect(dbname='tools_project', user=username)
 
         # Open a cursor to perform database operations
         cur = conn.cursor()
