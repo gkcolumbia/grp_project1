@@ -29,7 +29,7 @@ get_property(address) scrapes Zillow (https://www.zillow.com/). Given an address
 
 2. psql_create_tables.py
 
-This file should be run once in order to create the tables in the database. In line 5 dbName is the database name that the user is going to use (created beforehand) and user is the name of the user. There are 3 tables: foreclosure, property and plaintiff.
+This file should be run once in order to create the database and the tables. The user must change its name in line 8. There are 3 tables: foreclosure, property and plaintiff.
 
 
 3. psql_upload_data.py
