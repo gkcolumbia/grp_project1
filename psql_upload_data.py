@@ -125,5 +125,22 @@ def upload_data(list_foreclosures):
         # Close communication with the database
         cur.close()
         conn.close()
+def fix_property(start,end): #function to fix the problem with zillow blocking more than a number of scrapings and info being uploaded as NULL
+    conn = psycopg2.connect(dbname='foreclosures_db', user='gabrielapinto') #connect to the data base
+    cur = conn.cursor()
+    for entry in range(start,end): #get the id we want to fix
+        cur.execute("SELECT address FROM property WHERE id ='"+str(entry)+"';") #find the address for the entry
+        property_address = cur.fetchone()[0] #get the address for the entry id
+        get_data_zillow = get_property(property_address) #try to find the property
+        for i in range(7):
+            if get_data_zillow[i] == '--' or get_data_zillow[i] =='No Data':
+                get_data_zillow[i] = 'NULL'
+        query_update = "UPDATE property SET year_built = "+str(get_data_zillow[1])+" ,num_of_bedrooms = "+str(get_data_zillow[2])+",  num_of_bathrooms = "+str(get_data_zillow[3])+",  sqft = "+str(get_data_zillow[4])+",  last_year_sold = "+str(get_data_zillow[5])+", last_price_sold = "+str(get_data_zillow[6])+" WHERE id = '"+str(entry)+"';" #update the property's data
+        cur.execute(query_update)
+    conn.commit() #commit changes
+    # Close communication with the database
+    cur.close() #close database
+    conn.close()
+
 #list_foreclosures = get_foreclosures() #list of scrapped foreclosures. file: scraping_functions.py
 #upload_data(list_foreclosures)
