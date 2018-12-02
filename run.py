@@ -13,10 +13,5 @@ import requests
 import re
 from psql_upload_data import *
 
-t0 = time.time()
 list_foreclosures = get_foreclosures() #list of scrapped foreclosures. file: scraping_functions.py
 upload_data(list_foreclosures)
-
-t1 = time.time()
-print('Done')
-print(t1-t0)
