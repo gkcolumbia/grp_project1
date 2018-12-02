@@ -19,6 +19,7 @@ to run once a day and changes in property information are applied into the datab
 
 ## Each File Explained
 1. scraping_functions.py
+
 This file contains two web scraping functions. 
 
 get_foreclosures() scrapes the Sheriff's office website (https://salesweb.civilview.com/Sales/SalesSearch?countyId=2) and gets the information of houses on auction.
@@ -27,11 +28,13 @@ get_property(address) scrapes Zillow (https://www.zillow.com/). Given an address
 
 
 2. psql_create_tables.py
+
 This file should be run once in order to create the tables in the database. In line 5 dbName is the database name that the user is going to use (created beforehand) and user is the name of the user. There are 3 tables: foreclosure, property and plaintiff.
 
 
 3. psql_upload_data.py
-Contains the function that upload the information to the database.
+
+This file contains the function that upload the information to the database.
 upload_data(list_foreclosures) iterates over the list and check if the foreclosure, property or plantiff already exist and depending on this it is updated or inserted into the repective table.
 
 ## Run Instructions
