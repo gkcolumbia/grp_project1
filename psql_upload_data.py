@@ -125,5 +125,5 @@ def upload_data(list_foreclosures):
         # Close communication with the database
         cur.close()
         conn.close()
-list_foreclosures = get_foreclosures() #list of scrapped foreclosures. file: scraping_functions.py
-upload_data(list_foreclosures)
+#list_foreclosures = get_foreclosures() #list of scrapped foreclosures. file: scraping_functions.py
+#upload_data(list_foreclosures)
