@@ -144,3 +144,17 @@ def fix_property(start,end): #function to fix the problem with zillow blocking m
 
 #list_foreclosures = get_foreclosures() #list of scrapped foreclosures. file: scraping_functions.py
 #upload_data(list_foreclosures)
+
+#conn = psycopg2.connect(dbname='foreclosures_db', user='gabrielapinto')
+#cur = conn.cursor()
+#cur.execute("SELECT COUNT(id) FROM property ;")
+#entries = cur.fetchone()[0]
+ # Close communication with the database
+#cur.close()
+#conn.close()
+
+
+#iterations = int(entries/50)
+#for i in range(iterations):
+#    fix_property((i+1)*50,min((iterations+2)*50+1,entries+1))
+#    time.sleep(300)
