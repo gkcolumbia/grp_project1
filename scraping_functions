@@ -18,19 +18,22 @@ def get_foreclosures():
             sheriff_id = str(td_children[1].contents)[2:-2] #Sheriff ID
             sales_date = str(td_children[2].contents)[2:-2]
             plaintiff = str(td_children[3].contents)[2:-2]
+            plaintiff2 = plaintiff.replace("'","")
             defendant = str(td_children[4].contents)[2:-2]
             address = str(td_children[5].contents)[2:-2]
+            address2 = address.replace("'","")
             url = 'https://salesweb.civilview.com/'+str(link) #get into the details page
             response2 = session.get(url)
             soup2 = bs4.BeautifulSoup(response2.content, 'html.parser')
             list_of_tds = soup2.find_all('td')
             length_tds = len(list_of_tds)
             default_amount = str(list_of_tds[15])[4:-5]
+            default_amount2 = default_amount.replace("$","").replace(",","")
             initial_status = str(list_of_tds[20])[4:-5]
             initial_status_date = str(list_of_tds[21])[4:-5]
             last_status = str(list_of_tds[length_tds-2])[4:-5]
             last_status_date = str(list_of_tds[length_tds-1])[4:-5]
-            list_of_foreclosures.append([sheriff_id, address, initial_status, initial_status_date, last_status, last_status_date, plaintiff, defendant, default_amount,sales_date])
+            list_of_foreclosures.append([sheriff_id, address2, initial_status, initial_status_date, last_status, last_status_date, plaintiff2, defendant, default_amount2,sales_date])
     return list_of_foreclosures
 
 def get_property(address):
@@ -41,8 +44,10 @@ def get_property(address):
     result = bs4.BeautifulSoup(response.content,'lxml')
     try:
         bedroom_n = result.find('h3', 'edit-facts-light').find_all('span', {'class' : None})[0].get_text().split(' ')[0]
+        print(bedroom_n)
         bathroom_n = result.find('h3', 'edit-facts-light').find_all('span', {'class' : None})[1].get_text().split(' ')[0]
         size = result.find('h3', 'edit-facts-light').find_all('span', {'class' : None})[2].get_text().split(' ')[0]
+        size2 = size.replace(",","")
         year_built = result.find_all('div', {'class': 'fact-value'})[1].get_text()
         divs_text = ''
         all_divs = result.find_all('div', {'class': 'fact-value'})
@@ -54,10 +59,11 @@ def get_property(address):
         match = re.findall(pattern, divs_text)    
         last_sold_year = match[0].split(' ')[1]
         last_sold_price = match[0].split(' ')[3]
-        for data in year_built, bedroom_n, bathroom_n, size, last_sold_year, last_sold_price:
+        last_sold_price2 = last_sold_price.replace("$","").replace(",","")
+        for data in year_built, bedroom_n, bathroom_n, size, last_sold_year, last_sold_price2:
             if data == '--':
                 data = 'NULL'
     except:
-        year_built, bedroom_n, bathroom_n, size, last_sold_year, last_sold_price = 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL'
+        year_built, bedroom_n, bathroom_n, size, last_sold_year, last_sold_price2 = 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL'
     print(address)
-    return [address, year_built, bedroom_n, bathroom_n, size, last_sold_year, last_sold_price]
+    return [address, year_built, bedroom_n, bathroom_n, size2, last_sold_year, last_sold_price2]
