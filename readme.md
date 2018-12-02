@@ -6,8 +6,9 @@ Maria Jose Gamonal (UNI: mjg2268), Georges Kouame (UNI: nk2800), Jeff Lv (UNI: z
 
 # Description
 This package extracts foreclosure property information from a public foreclosures website, enriches the data with information 
-from a real estate website, and persists the enriched data into a database accessible from Python. The web parsing functionality can be automated 
-to run once a day and changes in property information are applied into the database
+from a real estate website (adding features like number of bedrooms, bathrooms, year built, last sold year and price), and persists the enriched data into a database accessible from Python. The web parsin functionality are automated to run week a day and changes in property information are updated into the database.
+
+This package essential consolidates the data betwwen the Sheriff's office website and Zillow, creates the foreclosure, plaintiff and property tables and updates them once a week.
 
 ## Requirements
 1. Python Modules
@@ -37,12 +38,24 @@ This file should be run once in order to create the database and the tables. The
 This file contains the function that upload the information to the database.
 upload_data(list_foreclosures) iterates over the list and check if the foreclosure, property or plantiff already exist and depending on this it is updated or inserted into the repective table.
 
+
 4. dbexport.pgsql
 
 This is a psql database that resulted after running the run.py file, which serves as an example here.
 
+5. auto_execute.sh
+
+This file creates a loop that runs this entire program once a week.
+
 ## Run Instructions
 
+1. Download this repo master branch to your local machine or cloud
+
+2. Change the username variable to your own SQL user name in both psql_create_tables.py and psql_upload_data.py
+
+3. Run the following comand line in terminal:
+
+   bash bin/auto_execute
 
 
 
