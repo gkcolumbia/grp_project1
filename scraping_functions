@@ -36,6 +36,8 @@ def get_foreclosures():
             list_of_foreclosures.append([sheriff_id, address2, initial_status, initial_status_date, last_status, last_status_date, plaintiff2, defendant, default_amount2,sales_date])
     return list_of_foreclosures
 
+# Given an address of a house, the get_property function returns the address, year built, 
+# number of bedrooms, number of bathrooms, size, last sold year for the house, last_sold_price for the house
 def get_property(address):
     link_address = address.replace(' ','-')
     url = 'https://www.zillow.com/homes/for_sale/' + link_address + '_rb/'
