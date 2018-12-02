@@ -37,6 +37,9 @@ This file should be run once in order to create the tables in the database. In l
 This file contains the function that upload the information to the database.
 upload_data(list_foreclosures) iterates over the list and check if the foreclosure, property or plantiff already exist and depending on this it is updated or inserted into the repective table.
 
+4.dbexport.pgsql
+This is a psql database that resulted after running the run.py file.
+
 ## Run Instructions
 
 
