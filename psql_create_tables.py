@@ -1,11 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Sat Dec  1 17:19:37 2018
-
-@author: María José Gamonal Sáenz
-
-"""
 
 import psycopg2
 conn = psycopg2.connect(dbname='tools_project', user='josehija')
@@ -24,12 +18,15 @@ def create_table(name,columns):
     cur.execute(query)
 
 name = "property"
-columns = "property_id SERIAL PRIMARY KEY, address TEXT, year_built INT, num_of_bedrooms INT, num_of_bathrooms INT, sqft INT" 
-#create_table(name, columns)
+columns = "id SERIAL PRIMARY KEY, address TEXT, year_built INT, num_of_bedrooms INT, num_of_bathrooms INT, sqft FLOAT, last_year_sold INT, last_price_sold FLOAT" 
+create_table(name, columns)
 
+nombre = "plaintiff"
+columns_pl = "id SERIAL PRIMARY KEY, name VARCHAR"
+create_table(nombre, columns_pl)
 
 table2 = "foreclosure"
-columns_table2 = "foreclosure_id SERIAL PRIMARY KEY, sheriff_num TEXT, initial_status TEXT, initial_status_date TEXT, last_status TEXT, last_status_date TEXT, last_update_date TEXT, plaintiff_id INT, defendant_id INT, default_amount INT, last_sale_date TEXT,property_id INT"
+columns_table2 = "sheriff_id TEXT PRIMARY KEY, property_id INT, initial_status VARCHAR, initial_status_date DATE, last_status VARCHAR, last_status_date DATE, plaintiff_id INT, defendant TEXT, default_amount FLOAT, sale_date DATE, FOREIGN KEY(property_id) REFERENCES property(id), FOREIGN KEY(plaintiff_id) REFERENCES plaintiff(id)"
 create_table(table2, columns_table2)
 
 #make changes permanent
