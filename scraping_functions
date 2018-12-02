@@ -66,5 +66,5 @@ def get_property(address):
             if data == '--':
                 data = 'NULL'
     except:
-        year_built, bedroom_n, bathroom_n, size, last_sold_year, last_sold_price2 = 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL'
+        year_built, bedroom_n, bathroom_n, size2, last_sold_year, last_sold_price2 = 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL'
     return [address, year_built, bedroom_n, bathroom_n, size2, last_sold_year, last_sold_price2]
