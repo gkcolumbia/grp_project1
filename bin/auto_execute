@@ -1,4 +1,6 @@
 #!/bin/sh
+
+python psql_create_tables.py
 while true
 do
 python run.py
