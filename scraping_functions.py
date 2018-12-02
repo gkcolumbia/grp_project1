@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+
 import bs4  # Beautiful Soup library helps us parse the content into objects. 
 import requests
 import re
