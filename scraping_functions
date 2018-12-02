@@ -29,10 +29,10 @@ def get_foreclosures():
             sheriff_id = str(td_children[1].contents)[2:-2] 
             sales_date = str(td_children[2].contents)[2:-2]
             plaintiff = str(td_children[3].contents)[2:-2]
-            plaintiff2 = plaintiff.replace("'","")
+            plaintiff2 = plaintiff.replace("'","") #Remove posible ' signs in the string to aboid conflicts
             defendant = str(td_children[4].contents)[2:-2]
             address = str(td_children[5].contents)[2:-2]
-            address2 = address.replace("'","")
+            address2 = address.replace("'","") #Remove posible ' signs in the string to aboid conflicts
             
             # Get into the details page
             url = 'https://salesweb.civilview.com/'+str(link) 
@@ -43,7 +43,7 @@ def get_foreclosures():
             
             # Get the default amount, initial status and date, last status and date of the auction
             default_amount = str(list_of_tds[15])[4:-5]
-            default_amount2 = default_amount.replace("$","").replace(",","")
+            default_amount2 = default_amount.replace("$","").replace(",","") #Remove $ and thousand separators so the amount can be easily turned into a float
             initial_status = str(list_of_tds[20])[4:-5]
             initial_status_date = str(list_of_tds[21])[4:-5]
             last_status = str(list_of_tds[length_tds-2])[4:-5]
@@ -73,7 +73,7 @@ def get_property(address):
         #print(bedroom_n)
         bathroom_n = result.find('h3', 'edit-facts-light').find_all('span', {'class' : None})[1].get_text().split(' ')[0]
         size = result.find('h3', 'edit-facts-light').find_all('span', {'class' : None})[2].get_text().split(' ')[0]
-        size2 = size.replace(",","")
+        size2 = size.replace(",","") #Remove thousand separators so the square footage can be easily turned into a float
         year_built = result.find_all('div', {'class': 'fact-value'})[1].get_text()
         divs_text = ''
         
@@ -90,7 +90,7 @@ def get_property(address):
         # Get the last sold year and price for the house
         last_sold_year = match[0].split(' ')[1]
         last_sold_price = match[0].split(' ')[3]
-        last_sold_price2 = last_sold_price.replace("$","").replace(",","")
+        last_sold_price2 = last_sold_price.replace("$","").replace(",","") #Remove $ and thousand separators so the amount can be easily turned into a float
         for data in year_built, bedroom_n, bathroom_n, size, last_sold_year, last_sold_price2:
             if data == '--':
                 data = 'NULL'
