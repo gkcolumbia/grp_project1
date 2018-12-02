@@ -18,7 +18,7 @@ to run once a day and changes in property information are applied into the datab
 - time
 
 ## Each File Explained
-1. scraping_functions
+1. scraping_functions.py
 This file contains two web scraping functions. 
 
 get_foreclosures() scrapes the Sheriff's office website (https://salesweb.civilview.com/Sales/SalesSearch?countyId=2) and gets the information of houses on auction.
