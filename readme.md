@@ -55,7 +55,7 @@ This file creates a loop that runs this entire program once a week.
 
 1. Download this repo master branch to your local machine or cloud.
 
-2. Change the username variable to your own SQL user name in both psql_create_tables.py and psql_upload_data.py files.
+2. Change the username and password variables to your own SQL user name and password in both psql_create_tables.py and psql_upload_data.py files. This step is necessary to avoid password-related issues
 
 3. Run the following comand line in terminal:
 
