@@ -5,9 +5,11 @@
 from scraping_functions import *
 import psycopg2
 
-username = 'jefflv'
+
 
 def upload_data(list_foreclosures):
+    username = 'josehija'
+    pwd = 'pass'
 
     #common beginning of the querys for inserting data.
     query_property_0 = "INSERT INTO property (id, address, year_built, num_of_bedrooms, num_of_bathrooms, sqft, last_year_sold, last_price_sold) VALUES (DEFAULT,'"
@@ -18,7 +20,7 @@ def upload_data(list_foreclosures):
     for row in list_foreclosures:
 
         #open connection to database named tools_project using user josehija (change if necesary)
-        conn = psycopg2.connect(dbname='tools_project', user=username)
+        conn = psycopg2.connect(dbname='tools_project', user=username, password=pwd)
 
         # Open a cursor to perform database operations
         cur = conn.cursor()
