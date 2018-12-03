@@ -17,6 +17,8 @@ This package essential consolidates the data betwwen the Sheriff's office websit
 - re
 - csv
 - time
+- psycopg2
+2.  install Postgres (More info: https://www.codementor.io/engineerapart/getting-started-with-postgresql-on-mac-osx-are8jcopb).
 
 ## Each File Explained
 1. scraping_functions.py
@@ -30,13 +32,13 @@ get_property(address) scrapes Zillow (https://www.zillow.com/). Given an address
 
 2. psql_create_tables.py
 
-This file should be run once in order to create the database and the tables. The user must change its name in line 8. There are 3 tables: foreclosure, property and plaintiff.
+This file is run once in order to create the database and the tables. The user must change its name in line 8. There are 3 tables: foreclosure, property and plaintiff.
 
 
 3. psql_upload_data.py
 
 This file contains the function that upload the information to the database.
-upload_data(list_foreclosures) iterates over the list and check if the foreclosure, property or plantiff already exist and depending on this it is updated or inserted into the repective table.
+upload_data(list_foreclosures) iterates over the list and check if the foreclosure, property or plantiff already exist and depending on the result it is updated or inserted into the repective table.
 
 
 4. dbexport.pgsql
@@ -49,9 +51,9 @@ This file creates a loop that runs this entire program once a week.
 
 ## Run Instructions
 
-1. Download this repo master branch to your local machine or cloud
+1. Download this repo master branch to your local machine or cloud.
 
-2. Change the username variable to your own SQL user name in both psql_create_tables.py and psql_upload_data.py
+2. Change the username variable to your own SQL user name in both psql_create_tables.py and psql_upload_data.py files.
 
 3. Run the following comand line in terminal:
 
