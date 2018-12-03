@@ -6,6 +6,7 @@ import sys
 # Username for the PostgreSQL database. The username value should be changed to the user's own username in the system
 
 username = 'josehija'
+pwd = 'pass'
 
 
 # Create the tools_project database
@@ -14,7 +15,7 @@ from psycopg2 import connect
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
 con = None
-con = connect(dbname='postgres', host='localhost', user=username)
+con = connect(dbname='postgres', host='localhost', user=username, password=pwd)
 
 dbname = "tools_project"
 
@@ -26,7 +27,7 @@ con.close()
 
 # Connect to the tools_project database
 
-conn = psycopg2.connect(dbname='tools_project', user=username)
+conn = psycopg2.connect(dbname='tools_project', user=username, password=pwd)
 
 # Open a cursor to perform database operations
 cur = conn.cursor()
