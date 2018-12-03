@@ -60,6 +60,8 @@ This file creates a loop that runs this entire program once a week.
 3. Run the following comand line in terminal:
 
    bash bin/auto_execute
+   
+   Note: The initial process to pull the necessary data from the web and update the database takes approximately 10 to 15 mins. Once the initial load is complete, subsequent inserts and updates do not last long
 
 
 
